@@ -30,7 +30,7 @@ exports.notFound = (req, res, next) => {
 	Rendering errors
 */
 
-exports.errorRender = (err, req, res) => {
+exports.errorRender = (err, req, res, next) => {
   res.status(err.status || 500);
   res.send(`${err.message}`);
 };
