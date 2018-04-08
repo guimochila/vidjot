@@ -1,14 +1,15 @@
 {
   "name": "vidjot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example of Express real project structure",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run watch\" \"npm run assets\" --names \"💻,📦\" --prefix name",
+    "start":
+      "concurrently \"npm run watch\" \"npm run assets\" --names \"💻,📦\" --prefix name",
     "watch": "nodemon ./app.js --ignore public/",
     "assets": "parcel watch public/js/vidjot.js -d public/dist"
   },
-  "author": "",
+  "author": "Guilherme Scaldelai",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -26,5 +27,18 @@
     "passport": "^0.4.0",
     "passport-local-mongoose": "^5.0.0",
     "slug": "^0.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "husky": "^0.14.3",
+    "jest": "^22.4.3",
+    "lint-staged": "^7.0.0",
+    "prettier": "^1.11.1"
   }
 }
