@@ -19,14 +19,6 @@
 				<li class="nav-item">
 					<a href="/logout" class="nav-link">Logout</a>
 				</li>
-				{{else}}
-				<li class="nav-item">
-					<a href="/login" class="nav-link">Login</a>
-				</li>
-				{{/if}}
-				<li class="nav-item">
-					<a href="/register" class="nav-link">Register</a>
-				</li>
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenu">Video Ideas</a>
 					<div class="dropdown-menu">
@@ -34,6 +26,14 @@
 						<a href="/ideas/add" class="dropdown-item">Add Idea</a>
 					</div>
 				</li>
+				{{else}}
+				<li class="nav-item">
+					<a href="/login" class="nav-link">Login</a>
+				</li>
+				<li class="nav-item">
+					<a href="/register" class="nav-link">Register</a>
+				</li>
+				{{/if}}
 			</ul>
 		</div>
 	</div>
