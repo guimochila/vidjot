@@ -1,4 +1,4 @@
-require ('dotenv').config({ path: './variables.env'});
+require('dotenv').config({ path: './variables.env' });
 
 const express = require('express');
 const exphbs = require('express-handlebars');
@@ -16,9 +16,10 @@ const hbsConfig = require('./utils/handlebars-helpers');
 const app = express();
 
 // Connect to Mongoose
-mongoose.connect(process.env.MONGODB_URL)
-.then(() => console.log('MongoDB Connected'))
-.catch(err => console.log(err));
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 // Map global Promise - Mongo default promise is deprecated.
 mongoose.Promise = global.Promise;
 
@@ -44,12 +45,14 @@ app.use(expressValidator());
 
 // Sessions allow us to store data on visitors from request to request
 // This keeps users logged in and allows us to send flash messages
-app.use(session({
-	secret: process.env.SECRET,
-	key: process.env.KEY,
-	resave: true,
-	saveUninitialized: true,
-}));
+app.use(
+  session({
+    secret: process.env.SECRET,
+    key: process.env.KEY,
+    resave: true,
+    saveUninitialized: true,
+  }),
+);
 
 // Initializing passport
 app.use(passport.initialize());
@@ -59,11 +62,10 @@ app.use(flash());
 
 // pass variables to our templates + all requests
 app.use((req, res, next) => {
-	res.locals.flashes = req.flash();
-	res.locals.user = req.user || null;
-	next();
+  res.locals.flashes = req.flash();
+  res.locals.user = req.user || null;
+  next();
 });
-
 
 // Loading Routes
 const routes = require('./routes/index');
@@ -81,4 +83,6 @@ app.use('/', routes);
 app.use(errorHandlers.notFound);
 app.use(errorHandlers.errorRender);
 
-app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));
+app.listen(process.env.PORT, () =>
+  console.log(`Listening on port ${process.env.PORT}`),
+);
