@@ -14,7 +14,9 @@ const hbsConfig = {
       const category = Object.keys(flash);
 
       flash[category].forEach(message => {
-        html += `<div class="alert alert-${category}"> ${message} </div>`;
+        html += `<div class="alert alert-${category}">
+                 <p onClick="this.parentElement.remove()"> ${message}</p>
+                </div>`;
       });
 
       return html;

@@ -81,6 +81,11 @@ app.use('/', routes);
 
 // Error Hanlding
 app.use(errorHandlers.notFound);
+
+if (app.get('env') === 'development') {
+  app.use(errorHandlers.developmentErrors);
+}
+
 app.use(errorHandlers.errorRender);
 
 app.listen(process.env.PORT, () =>

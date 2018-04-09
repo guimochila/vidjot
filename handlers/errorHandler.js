@@ -27,6 +27,25 @@ exports.notFound = (req, res, next) => {
 };
 
 /*
+  Development Error Handler
+*/
+exports.developmentErrors = (err, req, res, next) => {
+  const errorDetails = {
+    status: err.status,
+    message: err.message,
+    stack: err.stack,
+  };
+
+  res.status(err.status || 500);
+  res.format({
+    'text/html': () => {
+      res.render('error', errorDetails);
+    },
+    'application/json': () => res.json(errorDetails),
+  });
+};
+
+/*
 	Rendering errors
 */
 

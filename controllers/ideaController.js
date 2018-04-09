@@ -26,6 +26,8 @@ exports.validateIdea = (req, res, next) => {
 };
 
 exports.addIdeas = async (req, res) => {
+  req.body.author = req.user._id;
+
   const idea = await new Idea(req.body).save();
   req.flash('success', `Idea "${idea.title} was created."`);
   res.redirect('/ideas');
@@ -37,13 +39,24 @@ exports.getIdeas = async (req, res) => {
   res.render('ideas/show', { ideas });
 };
 
-exports.editIdeas = async (req, res) => {
+const confirmOwner = (idea, user) => {
+  if (!idea.author.equals(user._id)) {
+    throw new Error('You must own the idea to edit it!');
+  }
+};
+
+exports.editIdeas = async (req, res, next) => {
   const idea = await Idea.findOne({ _id: req.params.id });
+
+  if (!idea) return next();
+
+  confirmOwner(idea, req.user);
+
   idea.pageTitle = 'Update Idea';
   idea.methodURL = '?_method=PUT';
   idea.method = 'PUT';
 
-  res.render('ideas/edit', idea);
+  return res.render('ideas/edit', idea);
 };
 
 exports.updateIdeas = async (req, res) => {

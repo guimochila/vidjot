@@ -27,6 +27,11 @@ const ideaSchema = new Schema({
     type: String,
     lowercase: true,
   },
+  author: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: 'You must supply an author.',
+  },
 });
 
 ideaSchema.pre('save', async function createSlug(next) {
