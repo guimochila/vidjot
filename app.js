@@ -16,12 +16,12 @@ const hbsConfig = require('./utils/handlebars-helpers');
 const app = express();
 
 // Connect to Mongoose
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+mongoose.connect(process.env.MONGODB_URL);
 // Map global Promise - Mongo default promise is deprecated.
 mongoose.Promise = global.Promise;
+mongoose.connection.on('error', err => {
+  console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.msg}`);
+});
 
 // Load Models
 require('./models/Idea');
